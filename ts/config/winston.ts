@@ -4,7 +4,7 @@ const [Console, File] = [winston.transports.Console, winston.transports.File]
 
 // https://www.npmjs.com/package/winston
 // { error: 0, warn: 1, info: 2, verbose: 3, debug: 4, silly: 5 }
-const logdir = "../../logs"
+const logdir = "logs"
 
 function timestamp() {
     return moment().format("YYYYMMDD HH:mm:ss")

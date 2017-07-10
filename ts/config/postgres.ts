@@ -5,7 +5,7 @@ export const pgOpt = {
     options: {
         dialect: "postgres",
         host: "192.168.0.103",
-        port: 5544,
+        port: 5533,
         timezone: "+8:00",
         pool: {
             maxConnections: 5,
