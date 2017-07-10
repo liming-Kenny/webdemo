@@ -1,5 +1,12 @@
 import * as koa from "koa"
 import winston = require("winston")
+import { pgOpt } from "./config/postgres"
+import { Sequelize, Options } from "sequelize"
+import { init as initModel } from "./model"
+import { init as initDeamon } from "./deamon"
+import { config as logConfig } from "./config/winston"
+import { setSeqz } from "./lib/global"
+import { initRouter } from "./router"
 
 async function initKoa(app: koa) {
     const convert = require('koa-convert')
@@ -11,7 +18,7 @@ async function initKoa(app: koa) {
     // 静态文件
     const path = require('path')
     const serve = require('koa-static')
-    app.use(convert(serve(path.join(__dirname, '../public'))))
+    app.use(convert(serve(path.join(__dirname, '../../public'))))
 
     // 跨域
     const cors = require('koa-cors')
@@ -21,10 +28,13 @@ async function initKoa(app: koa) {
     const bodyParser = require('koa-bodyparser')
     app.use(convert(bodyParser()))
 
+    // 文件上传
+    const multer = require('koa-multer')
+    app.use(multer({ dest: '/tmp/' }).single("filename"))
+
     app.on("error", (err: any) => winston.error("%s", err))
 }
 
-import { initRouter } from "./router"
 async function main() {
     const app = new koa()
     try {
@@ -36,7 +46,7 @@ async function main() {
     }
 
     // listen
-    let port = parseInt(process.env.PORT) || 915
+    let port = parseInt(process.env.PORT) || 3355
     app.listen(port, () => console.log("listening on port", port))
 
     // handle uncaughtException
@@ -45,12 +55,6 @@ async function main() {
 
 //-------------------------------------------------------------------------
 
-import { pgOpt } from "./config/postgres"
-import { Sequelize, Options } from "sequelize"
-import { init as initModel } from "./model"
-import { init as initDeamon } from "./deamon"
-import { config as logConfig } from "./config/winston"
-import { setSeqz } from "./lib/global"
 async function initResource(app: koa) {
     winston.configure(logConfig) // 日志
 

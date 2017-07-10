@@ -4,8 +4,8 @@ export const pgOpt = {
     password: "123456",
     options: {
         dialect: "postgres",
-        host: "119.23.19.46",
-        port: 5432,
+        host: "192.168.0.103",
+        port: 5544,
         timezone: "+8:00",
         pool: {
             maxConnections: 5,

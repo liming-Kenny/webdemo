@@ -2,19 +2,34 @@
 <html>
 
 <head>
+    <script src="./js/libs/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript">
+        function get() {
+            $.get(
+                "http://localhost:3355/api/all",
+                function (d) {
+                    console.log(d);
+                    var n = d.length;
+                    for (var i = 0; i < n; i++) {
+                        $("#all").append("<tr><td>" + d[i].name + "</td><td>" + d[i].type + "</td><td>" + d[i].args + "</td><td>测试</td></tr>");
+                    }
+                }
+            );
+        }
+        get()
+    </script>
 </head>
 
 <body>
-    <form action="/test/upload" method="post" enctype="multipart/form-data">
-        <!--<label for="username">Username:</label>
-        <input type="text" name="username" id="username" />
-        <br/>
-        <label for="password">Password:</label>
-        <input type="text" name="password" id="password" />
-        <br/>-->
-        <input type="file" name="file" id="file" />
-        <input type="submit" name="submit" value="Submit" />
-    </form>
+    <div></div>
+    <table id="all">
+        <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>args</th>
+            <th>test</th>
+        </tr>
+    </table>
 </body>
 
 </html>

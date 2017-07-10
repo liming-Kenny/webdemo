@@ -1,22 +1,21 @@
-import { RouterWrap } from "../../lib/routerwrap"
-let formidable = require('formidable')
-let logger = require('koa-logger');
-let serve = require('koa-static');
-let parse = require('co-busboy');
-let koa = require('koa');
-let fs = require('fs');
-let app = new koa();
-let os = require('os');
-let path = require('path');
+import { RouterWrap } from "../../lib/routerwrap";
+import { getAsync } from "../../lib/request"
+export const router = new RouterWrap({ prefix: "/test" });
 
-
-export const router = new RouterWrap({ prefix: "/test" })
-
-
-router.handle("post", "/upload", async (ctx, next) => {
-    let form = new formidable.IncomingForm();
-    form.parse(ctx.request, function (err: any, fields: any, files: any) {
-        console.log(fields)
-        console.log(files)
-    })
+router.handle("post", "/post", async (ctx, next) => {
+    let res = (ctx.request as any).body;
+    ctx.body = { "你输入的信息为：": res.msg };
 })
+
+router.handle("get", "/get", async (ctx, next) => {
+    ctx.body = "收到get请求";
+})
+
+router.handle("get", "/getother", async (ctx, next) => {
+    let opt = {
+        url: "http://192.168.0.108:3355/test/get"
+    }
+    let res = await getAsync(opt)
+    ctx.body = "收到get请求" + res;
+})
+
