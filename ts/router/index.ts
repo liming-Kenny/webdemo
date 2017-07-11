@@ -8,11 +8,7 @@ export async function initRouter(app: koa) {
     const statAsync = promisify(stat)
 
     let paths = [
-<<<<<<< HEAD
         './test/test',
-=======
-        './crm/api',
->>>>>>> 5ce9494beed87c8378a1b423d8eacbd276df843b
     ]
 
     await Promise.all(paths.map(path => statAsync(join(__dirname, path) + ".js")))

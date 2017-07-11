@@ -17,7 +17,8 @@ router.handle("post", "/upload", async (ctx, next) => {
     let des_file = join("public/upload", file.originalname)
 
     fs.rename(file.path, des_file, err => { // 移动临时文件并重命名
-        if (err) console.error(err)
+        if (err)
+            console.error(err)
     })
 
     ctx.body = ""
