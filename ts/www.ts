@@ -18,7 +18,7 @@ async function initKoa(app: koa) {
     // 静态文件
     const path = require('path')
     const serve = require('koa-static')
-    app.use(convert(serve(path.join(__dirname, '../../public'))))
+    app.use(convert(serve(path.join(__dirname, '../public'))))
 
     // 跨域
     const cors = require('koa-cors')
