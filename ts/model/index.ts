@@ -9,6 +9,7 @@ const statAsync = promisify(stat)
 
 export async function init(seqz: Sequelize) {
     let paths: string[] = [
+        './api/api',
     ]
 
     await Promise.all(paths.map(path => statAsync(join(__dirname, path) + ".js")))

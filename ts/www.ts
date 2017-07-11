@@ -1,5 +1,12 @@
 import * as koa from "koa"
 import winston = require("winston")
+import { pgOpt } from "./config/postgres"
+import { Sequelize, Options } from "sequelize"
+import { init as initModel } from "./model"
+import { init as initDeamon } from "./deamon"
+import { config as logConfig } from "./config/winston"
+import { setSeqz } from "./lib/global"
+import { initRouter } from "./router"
 
 async function initKoa(app: koa) {
     const convert = require('koa-convert')
@@ -21,15 +28,20 @@ async function initKoa(app: koa) {
     const bodyParser = require('koa-bodyparser')
     app.use(convert(bodyParser()))
 
+<<<<<<< HEAD
     // TODO 文件上传
     const multer = require('koa-multer')
     //dest为临时文件位置，single为单个文件，用file提取，array为多个文件，使用files提取
     app.use(multer({ dest: '/tmp/' }).single("file"))
+=======
+    // 文件上传
+    const multer = require('koa-multer')
+    app.use(multer({ dest: '/tmp/' }).single("filename"))
+>>>>>>> 5ce9494beed87c8378a1b423d8eacbd276df843b
 
     app.on("error", (err: any) => winston.error("%s", err))
 }
 
-import { initRouter } from "./router"
 async function main() {
     const app = new koa()
     try {
@@ -41,7 +53,11 @@ async function main() {
     }
 
     // listen
+<<<<<<< HEAD
     let port = parseInt(process.env.PORT) || 920
+=======
+    let port = parseInt(process.env.PORT) || 3355
+>>>>>>> 5ce9494beed87c8378a1b423d8eacbd276df843b
     app.listen(port, () => console.log("listening on port", port))
 
     // handle uncaughtException
@@ -50,12 +66,6 @@ async function main() {
 
 //-------------------------------------------------------------------------
 
-import { pgOpt } from "./config/postgres"
-import { Sequelize, Options } from "sequelize"
-import { init as initModel } from "./model"
-import { init as initDeamon } from "./deamon"
-import { config as logConfig } from "./config/winston"
-import { setSeqz } from "./lib/global"
 async function initResource(app: koa) {
     winston.configure(logConfig) // 日志
 
