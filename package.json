@@ -1,5 +1,5 @@
 {
-  "name": "apimanage",
+  "name": "myweb",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,28 +8,6 @@
   "author": "liny",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
-    "@types/bluebird": "^3.0.37",
-    "@types/koa": "^2.0.38",
-    "@types/koa-router": "^7.0.21",
-    "@types/node": "^8.0.9",
-    "@types/winston": "^2.2.0",
-    "immutable": "^3.8.1",
-    "koa": "^2.0.1",
-    "koa-bodyparser": "^4.1.0",
-    "koa-convert": "^1.2.0",
-    "koa-cors": "^0.0.16",
-    "koa-logger": "^2.0.1",
-    "koa-multer": "^1.0.1",
-    "koa-router": "^7.0.1",
-    "koa-static": "^3.0.0",
-    "moment": "^2.18.1",
-    "pg": "^6.2.2",
-    "redis": "^2.7.1",
-    "request": "^2.80.0",
-    "sequelize": "^3.30.4",
-    "winston": "^2.3.1"
-=======
     "@types/bluebird": "3.5.8",
     "@types/koa": "2.0.39",
     "@types/koa-router": "7.0.22",
@@ -50,7 +28,6 @@
     "request": "2.81.0",
     "sequelize": "3.30.4",
     "winston": "2.3.1"
->>>>>>> 5ce9494beed87c8378a1b423d8eacbd276df843b
   },
   "devDependencies": {}
 }
