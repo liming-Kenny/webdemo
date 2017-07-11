@@ -11,7 +11,7 @@ async function initKoa(app: koa) {
     // 静态文件
     const path = require('path')
     const serve = require('koa-static')
-    app.use(convert(serve(path.join(__dirname, '../public'))))
+    app.use(convert(serve(path.join(__dirname, '../../public'))))
 
     // 跨域
     const cors = require('koa-cors')
@@ -20,6 +20,11 @@ async function initKoa(app: koa) {
     // body解析
     const bodyParser = require('koa-bodyparser')
     app.use(convert(bodyParser()))
+
+    // TODO 文件上传
+    const multer = require('koa-multer')
+    //dest为临时文件位置，single为单个文件，用file提取，array为多个文件，使用files提取
+    app.use(multer({ dest: '/tmp/' }).single("file"))
 
     app.on("error", (err: any) => winston.error("%s", err))
 }
@@ -36,7 +41,7 @@ async function main() {
     }
 
     // listen
-    let port = parseInt(process.env.PORT) || 915
+    let port = parseInt(process.env.PORT) || 920
     app.listen(port, () => console.log("listening on port", port))
 
     // handle uncaughtException
